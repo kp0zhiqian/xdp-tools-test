@@ -9,7 +9,7 @@ test_mode = ["skb", "native"]
 # tier1 will run basic functional testing, tier2 will run as much as tests we can
 # tier2 includes verbose option and --status options, tier2 normally used by QE
 tier = "tier1" # tier1 or tier2
-exec_file = "complied" # complied or system. complied will test this repo's complied exec file, sytem will test the xdp-tools by using system's pkg
+exec_file = "complied" # complied or system. complied will test xdp-tools repo's complied exec file, sytem will test the xdp-tools by using system's pkg
 firewall_exist = false # true/false, true means you machine has firewalld deamon, this test will stop it and recover it after all done
 
 
