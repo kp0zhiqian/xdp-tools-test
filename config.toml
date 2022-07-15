@@ -1,0 +1,71 @@
+[global]
+xdp_loader_directory = "xdp-loader"
+xdp_filter_directory = "xdp-filter"
+xdpdump_directory = "xdp-dump"
+# selected_tools = ["xdp-loader"]
+selected_tools = ["xdpdump", "xdp-loader", "xdp-filter"]
+required_tools = ["capinfos", "ethtool", "ip", "ping", "sed", "tc", "tcpdump", "timeout", "nc", "tshark", "bpftool"]
+test_mode = ["skb", "native"]
+# tier1 will run basic functional testing, tier2 will run as much as tests we can
+# tier2 includes verbose option and --status options, tier2 normally used by QE
+tier = "tier1" # tier1 or tier2
+exec_file = "complied" # complied or system. complied will test this repo's complied exec file, sytem will test the xdp-tools by using system's pkg
+firewall_exist = false # true/false, true means you machine has firewalld deamon, this test will stop it and recover it after all done
+
+
+[networking]
+host_veth_name = "xdptest-veth0"
+ns_veth_name = "xdptest-veth1"
+server_ipv4 = "172.16.1.1/24"
+client_ipv4 = "172.16.1.2/24"
+server_ipv6 = "2000::1/64"
+client_ipv6 = "2000::2/64"
+test_l4_port = "12345"
+
+[skip_cases]
+xdp_loader = []
+xdp_filter = []
+xdpdump = []
+
+[topology]
+# topo_type: you can run this test on two machines to test a specific NIC or run this on a single machine to test xdp-tools against veth. 
+# Valid value: "namespace", "physical", default is "namespace"
+topo_type = "namespace"
+
+# !! Feature in development: !!
+# uncomment below section if you run in physical type
+# remote_server = "10.0.0.1"
+# local_ifname = "eth0"
+# remote_ifname = "eth1"
+# remote_user = "root"
+# remote_passwd = "root"
+# ssh_key_path = "~/.ssh/xxx.pub"
+
+# Tool specific settings
+[xdp-loader]
+test_bpffs_path = "/sys/fs/bpf/xdptest"
+    [[xdp-loader.progs]]
+    filename = "xdp_drop"
+        [[xdp-loader.progs.section]]
+        section_name = "xdp"
+        prog_name = "xdp_drop"
+    
+    [[xdp-loader.progs]]
+    filename = "xdp_pass"
+        [[xdp-loader.progs.section]]
+        section_name = "xdp"
+        prog_name = "xdp_pass"
+
+    [[xdp-loader.progs]]    
+    filename = "test_long_func_name"
+        [[xdp-loader.progs.section]]
+        section_name = "xdp"
+        prog_name = "xdp_test_prog_with_a_long_name"
+        [[xdp-loader.progs.section]]
+        section_name = "xdp"
+        prog_name = "xdp_test_prog_with_a_long_name_too"
+
+
+[xdp-filter]
+
+[xdpdump]
