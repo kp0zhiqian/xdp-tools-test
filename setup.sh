@@ -2,7 +2,7 @@ if cat config.toml | grep 'exec_file = "complied"'; then
     # Fetch upstream repo 
     git submodule update --init --recursive || exit 1
     # Install build tools
-    rpm -q zlib-devel libpcap-devel elfutils-libelf-devel || sudo dnf install -yq zlib-devel libpcap-devel elfutils-libelf-devel
+    rpm -q zlib-devel libpcap-devel elfutils-libelf-devel m4 || sudo dnf install -yq zlib-devel libpcap-devel elfutils-libelf-devel m4
     # Build upstream xdp-tools
     pushd xdp-tools
     ./configure
