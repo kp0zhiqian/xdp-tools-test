@@ -7,6 +7,7 @@
 # Copyright (c) 2020 Red Hat
 
 #!/usr/bin/python3
+import sys
 import unittest
 from test_xdp_loader import XDP_LOADER_CASES
 from test_xdp_filter import XDP_FILTER_CASES
@@ -32,5 +33,5 @@ if __name__ == "__main__":
         all_tests.addTest(xdpdump_test)
         logger.info("xdpdump cases loaded.")
         
-    unittest.TextTestRunner(verbosity=2).run(all_tests)
+    unittest.TextTestRunner(verbosity=2, stream=sys.stdout).run(all_tests)
     logger.info(f"{TITLE_WRAPPER} END JOB {TITLE_WRAPPER}")
