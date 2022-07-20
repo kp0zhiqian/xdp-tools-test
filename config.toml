@@ -2,7 +2,7 @@
 xdp_loader_directory = "xdp-loader"
 xdp_filter_directory = "xdp-filter"
 xdpdump_directory = "xdp-dump"
-# selected_tools = ["xdp-loader"]
+
 selected_tools = ["xdpdump", "xdp-loader", "xdp-filter"]
 required_tools = ["capinfos", "ethtool", "ip", "ping", "sed", "tc", "tcpdump", "timeout", "nc", "tshark", "bpftool"]
 test_mode = ["skb", "native"]
