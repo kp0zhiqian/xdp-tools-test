@@ -25,15 +25,21 @@ FIREWALL = config['global']['firewall_exist']
 
 TEST_PROG_PATH = f"{PROJECT_PATH}/test_progs"
 
-if config['global']['exec_file'] == "complied":
-    XDP_FILTER = f"{PROJECT_PATH}/xdp-tools/xdp-filter/xdp-filter"
-    XDP_LOADER = f"{PROJECT_PATH}/xdp-tools/xdp-loader/xdp-loader"
-    XDPDUMP = f"{PROJECT_PATH}/xdp-tools/xdp-dump/xdpdump"
-elif config['global']['exec_file'] == "system":
+if os.environ.get('EXEC_FILE') == None:
+    exec_file = config['global']['exec_file']
+else:
+    exec_file = os.environ.get('EXEC_FILE')
+
+if exec_file == "system":
     XDP_FILTER = "xdp-filter"
     XDP_LOADER = "xdp-loader"
     XDPDUMP = "xdpdump"
-    
+else:
+    # Use xdp-tools upstream exec file by default
+    XDP_FILTER = f"{PROJECT_PATH}/xdp-tools/xdp-filter/xdp-filter"
+    XDP_LOADER = f"{PROJECT_PATH}/xdp-tools/xdp-loader/xdp-loader"
+    XDPDUMP = f"{PROJECT_PATH}/xdp-tools/xdp-dump/xdpdump"
+   
 
 
 HOST_VETH_NAME = config['networking']['host_veth_name']
