@@ -10,7 +10,7 @@ make
 popd
 
 rpm -q wireshark iproute-tc nc tcpdump bpftool || sudo dnf install -yq wireshark iproute-tc nc tcpdump bpftool python3-pip
-pip install tomli
+pip install tomli || pip3 install tomli
 
 
 mkdir test_progs
